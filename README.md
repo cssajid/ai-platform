@@ -1,170 +1,197 @@
-# ChatBox with Ollama
+# 🚀 AI Platform (Chat UI + AI Gateway)
 
-A local ChatGPT-style web interface connected to Ollama for running
-Large Language Models (LLMs) locally.
+This project contains:
 
-This project allows you to: - Run local LLM models using Ollama -
-Interact through a ChatGPT-style UI - Extend for enterprise AI, RAG, or
-agent-based workflows
-
-------------------------------------------------------------------------
-
-# 🚀 Prerequisites
-
-Before running this project, make sure you have installed:
-
--   Node.js (v18 or higher recommended)
--   npm (comes with Node.js)
--   Ollama
+-   🖥 Frontend (Next.js Chat UI)
+-   ⚙ Backend (Express AI Gateway with Ollama)
+-   🤖 Ollama LLM integration
+-   🔄 Streaming support
+-   🧠 Context-based state management
 
 ------------------------------------------------------------------------
 
-# 🧠 Install Ollama
+# 📂 Project Structure
 
-Download and install Ollama from:
+    ai-platform/
+    │
+    ├── frontend/
+    │   └── chat-ui/        → Next.js application
+    │
+    ├── backend/
+    │   └── ai-gateway/     → Express + Ollama integration
 
-https://ollama.com
+------------------------------------------------------------------------
 
-After installation, verify:
+# ✅ Prerequisites
 
+Make sure the following are installed:
+
+-   Node.js (v18+ recommended)
+-   npm
+-   Ollama (https://ollama.com)
+-   VS Code
+
+Check versions:
+
+    node -v
+    npm -v
     ollama --version
 
 ------------------------------------------------------------------------
 
-# 📂 Open Project in VS Code
+# 🖥 1️⃣ Run Backend (AI Gateway)
 
-1.  Open VS Code
-2.  Click File → Open Folder
-3.  Select your project folder `ChatGPT-UI-with-Ollama`
+### Step 1: Open VS Code
 
-------------------------------------------------------------------------
+Open the root folder:
 
-# 📦 Install Project Dependencies
+    ai-platform
 
-Open Terminal inside VS Code:
+### Step 2: Open Terminal in VS Code
 
     Terminal → New Terminal
 
-Then run:
+### Step 3: Navigate to backend
+
+    cd backend/ai-gateway
+
+### Step 4: Install dependencies
 
     npm install
 
-This will install all required dependencies.
+### Step 5: Make sure Ollama is running
 
-------------------------------------------------------------------------
-
-# 🤖 Pull an Ollama Model
-
-Before running the UI, download a model.
-
-Example:
-
-    ollama pull llama3
-
-To see installed models:
-
-    ollama list
-
-------------------------------------------------------------------------
-
-# ▶️ Start Ollama Server
-
-Run:
+If not already running:
 
     ollama serve
 
-Ollama will start at:
+If you see port error, it means Ollama is already running.
 
-    http://localhost:11434
-
-Keep this terminal running.
-
-------------------------------------------------------------------------
-
-# 💻 Run the ChatGPT UI
-
-Open a new terminal in VS Code and run:
-
-    npm run dev
-
-The application will start at:
-
-    http://localhost:3000
-
-Open this URL in your browser.
-
-------------------------------------------------------------------------
-
-# ⚙️ Environment Configuration (If Required)
-
-If your project uses environment variables:
-
-Create a file in root:
-
-    .env
+### Step 6: Pull model (first time only)
 
 Example:
 
+    ollama pull llama3.2
+
+Check installed models:
+
+    ollama list
+
+### Step 7: Start backend server
+
+If using TypeScript:
+
+    npx ts-node server.ts
+
+Or if using npm script:
+
+    npm run dev
+
+You should see:
+
+    AI Gateway running on port 5000
+
+Backend URL:
+
+    http://localhost:5000
+
+------------------------------------------------------------------------
+
+# 🌐 2️⃣ Run Frontend (Chat UI)
+
+Open a new terminal in VS Code.
+
+### Step 1: Navigate to frontend
+
+    cd frontend/chat-ui
+
+### Step 2: Install dependencies
+
+    npm install
+
+### Step 3: Start development server
+
+    npm run dev
+
+You should see:
+
+    Local: http://localhost:3000
+
+Open in browser:
+
+    http://localhost:3000
+
+------------------------------------------------------------------------
+
+# 🔄 Full System Flow
+
+1.  User types message in Chat UI
+2.  Frontend sends request to: http://localhost:5000/api/chat
+3.  Backend calls Ollama
+4.  Ollama streams response
+5.  Frontend displays streaming output
+
+------------------------------------------------------------------------
+
+# 🛑 Common Issues
+
+## npm not recognized
+
+Install Node.js from: https://nodejs.org
+
+Restart VS Code after installation.
+
+------------------------------------------------------------------------
+
+## Port 11434 already in use
+
+Ollama is already running. Do NOT run `ollama serve` again.
+
+------------------------------------------------------------------------
+
+## Cannot POST /api/chat
+
+Make sure backend is running on port 5000.
+
+------------------------------------------------------------------------
+
+# ⚙ Environment Variables (Optional)
+
+Create `.env` inside:
+
+    backend/ai-gateway/
+
+Example:
+
+    PORT=5000
     OLLAMA_BASE_URL=http://localhost:11434
-    MODEL_NAME=llama3
-
-Do NOT commit `.env` to GitHub.
 
 ------------------------------------------------------------------------
 
-# 📁 Project Structure
+# 🚀 Production Deployment (Basic)
 
-    /frontend
-    /src
-    /public
-    package.json
-    .gitignore
-    README.md
+Frontend:
 
-------------------------------------------------------------------------
+    npm run build
+    npm start
 
-# 🛑 Important Notes
+Backend:
 
--   Do NOT commit `node_modules`
--   Do NOT commit `.env`
--   Do NOT commit large model files (.gguf, .bin)
--   Always start Ollama before running the UI
+Use PM2 or Docker for production.
 
 ------------------------------------------------------------------------
 
-# 🧪 Troubleshooting
+# 🧠 Next Steps
 
-## Port Already in Use
-
-Stop other running processes or change the port.
-
-## Model Not Responding
-
-Make sure: - Ollama is running - The model is downloaded - Port 11434 is
-accessible
-
-## npm install Fails
-
-Ensure Node.js version is 18+
-
-Check version:
-
-    node -v
-
-------------------------------------------------------------------------
-
-# 🔮 Future Improvements
-
--   Add RAG (Retrieval-Augmented Generation)
--   Add multi-model selection
--   Add admin configuration panel
--   Add agent-based workflows
--   Dockerize for production deployment
--   Add plugin support for external integration
+-   Add database persistence
+-   Add Admin Panel
+-   Add RAG support
+-   Add Agent orchestration
+-   Add n8n workflow integration
 
 ------------------------------------------------------------------------
 
 # 👨‍💻 Author
 
 Sajid Ahmad\
-Building AI Platform with Ollama + ChatGPT-style web interface
+Building AI Platform with Ollama + ChatGPT style web UI (Fooundation)
