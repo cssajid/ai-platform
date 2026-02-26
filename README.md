@@ -1,4 +1,4 @@
-# ChatGPT UI with Ollama
+# ChatBox with Ollama
 
 A local ChatGPT-style web interface connected to Ollama for running
 Large Language Models (LLMs) locally.
@@ -167,4 +167,4 @@ Check version:
 # 👨‍💻 Author
 
 Sajid Ahmad\
-Building AI Platform with Ollama + ChatGPT UI
+Building AI Platform with Ollama + ChatGPT-style web interface
